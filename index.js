@@ -29,7 +29,7 @@ ControllerAudiophonicsOnOff.prototype.onVolumioStart = function()
 	return libQ.resolve();	
 };
 
-ControllerRaspDac.prototype.onVolumioReboot = function()
+ControllerAudiophonicsOnOff.prototype.onVolumioReboot = function()
 {
       var self = this;
       self.softShutdown.writeSync(1);
@@ -77,10 +77,24 @@ ControllerAudiophonicsOnOff.prototype.stop = function() {
 ControllerAudiophonicsOnOff.prototype.onStart = function() {
 	var self = this;
 	self.logger.info("Configuring GPIO pins");
-
-	self.softShutdown = new Gpio(self.config.get('soft_shutdown'), 'out');
-	self.shutdownButton = new Gpio(self.config.get('shutdown_button'), 'in', 'both');
-	self.bootOk = new Gpio(self.config.get('boot_ok'), 'high');
+	
+	if(self.tryParse(self.config.get('soft_shutdown'), 0) != 0)
+	{
+		self.softShutdown = new Gpio(parseInt(self.config.get('soft_shutdown')), 'out')
+		self.logger.info('Soft shutdown GPIO binding... OK');
+	}
+	
+	if(self.tryParse(self.config.get('shutdown_button'), 0) != 0)
+	{
+		self.shutdownButton = new Gpio(parseInt(self.config.get('shutdown_button')), 'in', 'both');
+		self.logger.info('Hardware button GPIO binding... OK');
+	}
+	
+	if(self.tryParse(self.config.get('boot_ok'), 0) != 0)
+	{
+		self.bootOk = new Gpio(parseInt(self.config.get('boot_ok')), 'high');
+		self.logger.info('Boot OK GPIO binding... OK');
+	}
 	
 	self.shutdownButton.watch(self.hardShutdownRequest.bind(this));
 	
@@ -164,14 +178,28 @@ ControllerAudiophonicsOnOff.prototype.updateButtonConfig = function (data)
 {
 	var self = this;
 	
-	self.config.set('soft_shutdown', data['soft_shutdown'].value);
-	self.config.set('shutdown_button', data['shutdown_button'].value);
+	self.config.set('soft_shutdown', data['soft_shutdown']);
+	self.config.set('shutdown_button', data['shutdown_button']);
 	self.config.set('boot_ok', data['boot_ok']);
-		
+	
+	self.commandRouter.pushToastMessage('success', 'Successfully saved the new configuration.');
 	return libQ.resolve();
 };
 
 // Button Management
-ControllerRaspDac.prototype.hardShutdownRequest = function(err, value) {
+ControllerAudiophonicsOnOff.prototype.hardShutdownRequest = function(err, value) {
+	var self = this;
 	self.commandRouter.shutdown();
+};
+
+ControllerAudiophonicsOnOff.prototype.tryParse = function(str,defaultValue) {
+     var retValue = defaultValue;
+     if(str !== null) {
+         if(str.length > 0) {
+             if (!isNaN(str)) {
+                 retValue = parseInt(str);
+             }
+         }
+     }
+     return retValue;
 };

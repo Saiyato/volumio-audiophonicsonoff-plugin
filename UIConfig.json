@@ -5,12 +5,12 @@
 	"sections": [{
 		"id": "pin_settings",
 		"element": "section",
-		"label": "TRANSLATE.AUDIOPHONICSONOFF.DISPLAYCONFIG",
-		"description": "TRANSLATE.AUDIOPHONICSONOFF.D_DISPLAYCONFIG",
+		"label": "TRANSLATE.AUDIOPHONICSONOFF.GPIOCONFIG",
+		"description": "TRANSLATE.AUDIOPHONICSONOFF.D_GPIOCONFIG",
 		"icon": "fa-sliders",
 		"onSave": {
 			"type": "controller",
-			"endpoint": "miscellanea/audiophonicsonoff",
+			"endpoint": "system_controller/audiophonicsonoff",
 			"method": "updateButtonConfig"
 		},
 		"saveButton": {
@@ -26,24 +26,27 @@
 			"id": "soft_shutdown",
 			"element": "input",
 			"type": "text",
-			"doc": "TRANSLATE.AUDIOPHONICSONOFF.D_SEPARATOR",
-			"label": "TRANSLATE.AUDIOPHONICSONOFF.SEPARATOR",
+			"doc": "TRANSLATE.AUDIOPHONICSONOFF.D_SOFTSHUTDOWN",
+			"label": "TRANSLATE.AUDIOPHONICSONOFF.SOFTSHUTDOWN",
+			"description": "TRANSLATE.AUDIOPHONICSONOFF.DD_SOFTSHUTDOWN",
 			"value": "4"
 		},
 		{
 			"id": "shutdown_button",
 			"element": "input",
 			"type": "text",
-			"doc": "TRANSLATE.AUDIOPHONICSONOFF.D_PATTERN",
-			"label": "TRANSLATE.AUDIOPHONICSONOFF.PLAYING0",
+			"doc": "TRANSLATE.AUDIOPHONICSONOFF.D_SHUTDOWNBUTTON",
+			"label": "TRANSLATE.AUDIOPHONICSONOFF.SHUTDOWNBUTTON",
+			"description": "TRANSLATE.AUDIOPHONICSONOFF.DD_SHUTDOWNBUTTON",
 			"value": "17"
 		},
 		{
 			"id": "boot_ok",
 			"element": "input",
 			"type": "text",
-			"doc": "TRANSLATE.AUDIOPHONICSONOFF.D_PATTERN",
-			"label": "TRANSLATE.AUDIOPHONICSONOFF.PLAYING1",
+			"doc": "TRANSLATE.AUDIOPHONICSONOFF.D_BOOTOK",
+			"label": "TRANSLATE.AUDIOPHONICSONOFF.BOOTOK",
+			"description": "TRANSLATE.AUDIOPHONICSONOFF.DD_BOOTOK",
 			"value": "22"
 		}]
 	}]
