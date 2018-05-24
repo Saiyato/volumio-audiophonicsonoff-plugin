@@ -9,3 +9,6 @@ You can configure three GPIO pins:
 1. The GPIO pin which is set to HIGH when Volumio receives a shutdown command
 2. The GPIO pin which is set to HIGH when the power button is pressed
 3. The GPIO pin which is set to HIGH after booting successfully (i.e. Volumio and this plugin have started)
+
+## pydPiper
+The pydPiper plugin can be found here: https://github.com/Saiyato/volumio-pydpiper-plugin
