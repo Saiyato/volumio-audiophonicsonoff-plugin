@@ -1,5 +1,5 @@
 ## Character display uninstallation script
-echo "Uninstalling character display and its dependencies..."
+echo "Uninstalling Audiophonics on/off and its dependencies..."
 INSTALLING="/home/volumio/audiophonicsonoff-plugin.uninstalling"
 
 if [ ! -f $INSTALLING ]; then

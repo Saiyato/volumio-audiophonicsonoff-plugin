@@ -1,5 +1,5 @@
 ## Character display installation script
-echo "Installing character display and its dependencies..."
+echo "Installing Audiophonics on/off and its dependencies..."
 INSTALLING="/home/volumio/audiophonicsonoff-plugin.installing"
 
 if [ ! -f $INSTALLING ]; then
